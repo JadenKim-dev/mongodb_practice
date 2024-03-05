@@ -150,10 +150,10 @@ switched to db video
 ```json
 {
     "name" : "John Doe",
-    "address” : {
-        "street" : "123 Park Street”,
+    "address" : {
+        "street" : "123 Park Street",
         "city" : "Anytown",
-        "state” : "NY"
+        "state" : "NY"
     }
 }
 ```
