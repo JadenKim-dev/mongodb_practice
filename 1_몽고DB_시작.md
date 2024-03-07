@@ -192,6 +192,65 @@ $ mongo some-host:30000/myDB
 만약 셸 실행 시 어떤 데이터베이스에도 연결되지 않길 원한다면 一nodb 옵션을 주고 셸을 실행하면 된다.  
 이후에 원하는 때에 `new Mongo（호스트명）`를 통해 데이터베이스에 연결한다.
 
+```
+$ mongo --nodb
+> conn = new Mongo("some-host:30000")
+> db = conn.getDB("myDB")
+```
+
+### 2.7.1 셸 활용 팁
+
+몽고DB 셸은 기본적으로 자바스크립트 셸로 동작한다.  
+셸에 내장된 도움말을 확인하고 싶다면 help를 입력하고, 특정 함수의 소스 코드를 확인하고 싶다면 호출 없이 함수를 입력하면 된다.
+
+```
+> db.movies.updateOne
+```
+
+### 2.7.2 셸에서 스크립트 실행하기
+
+셸에서는 interactive 하게 명령어를 입력하는 것 외에도, 스크립트를 실행하는 것도 가능하다.
+
+```
+$ mongo script1.js
+```
+
+대화형 셀에 접근한 뒤에도 load를 통해 스크립트를 실행하는 것도 가능하다.
+
+```
+> load("scriptl.js")
+```
+
+스크립트 내에서는 전역 변수인 db에 접근하는 것이 가능하다.  
+다만 `use database`, `show collections` 와 같은 helper 명령어들은 사용할 수 없다.
+
+스크립트에서 변수를 정의하고, 이를 대화형 셸에서 사용하는 것도 가능하다.  
+예를 들어 다음과 같이 connectTo를 스크립트에서 정의하고, 이를 실행하면 셸에서 connectTo 함수에 접근하고 호출할 수 있다.
+
+```js
+// script1.js
+var connectTo = function(port, dbname) {
+    if (!port) {
+        port = 27017;
+    }
+    if (!dbname) {
+        dbname = "test";
+    }
+    db = connect("localhost:"+port+"/"+dbname);
+    return db;
+}；
+```
+
+```
+> load('defineConnectTo.j s')
+> typeof connectTo
+function
+```
+
+셸은 기본적으로 셸을 시작한 디렉토리에서 스크립트를 찾는다.  
+그 외의 디렉토리에 위치한 파일에 접근해야 한다면, 파일의 절대 경로 또는 상대 경로를 지정할 수 있다.  
+`load("/home/myUser/my-scripts/defineConnectTo.js"）`
+
 
 
 
