@@ -251,7 +251,9 @@ function
 그 외의 디렉토리에 위치한 파일에 접근해야 한다면, 파일의 절대 경로 또는 상대 경로를 지정할 수 있다.  
 `load("/home/myUser/my-scripts/defineConnectTo.js"）`
 
+### 2.7.3 .mongorc.js 만들기
 
+셸을 시작할 때마다 특정 스크립트가 실행되게 하고 싶다면 .mongorc.js 에 정의하면 된다.
 
 
 
