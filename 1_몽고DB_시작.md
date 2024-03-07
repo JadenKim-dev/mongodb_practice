@@ -253,7 +253,27 @@ function
 
 ### 2.7.3 .mongorc.js 만들기
 
-셸을 시작할 때마다 특정 스크립트가 실행되게 하고 싶다면 .mongorc.js 에 정의하면 된다.
+셸을 시작할 때마다 특정 스크립트가 실행되게 하고 싶다면 홈 디렉토리의 .mongorc.js에 스크립트를 작성하면 된다.  
+셸에서 사용할 전역 변수를 정의하거나, 내장 함수를 재정의 하는 등의 작업이 가능하다.  
+보통은 dropDatabase나 deletelndexes 같은 위험한 함수가 작동하지 않게끔 재정의하는 경우가 많다.
+
+```js
+// 데이터베이스 삭제 방지
+db.dropDatabase = DB.prototype.dropDatabase = no;
+// 컬렉션 삭제 방지
+DBCollection.prototype.drop = no;
+// 인덱스 삭제 방지
+DBCollection.prototype.dropindex = no;
+// 인덱스 삭제 방지
+DBCollection.prototype.dropindexes = no;
+```
+
+### 2.7.4 프롬프트 커스터마이징하기
+
+
+
+
+
 
 
 
