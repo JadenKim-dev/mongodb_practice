@@ -270,12 +270,27 @@ DBCollection.prototype.dropindexes = no;
 
 ### 2.7.4 프롬프트 커스터마이징하기
 
+기본 셸 프롬프트를 수정하고 싶다면, 전역의 prompt 변수에 원하는 문자열을 반환하는 함수를 할당하면 된다.  
+예를 들어 현재 데이터베이스명을 출력하는 프롬프트를 다음과 같이 정의할 수 있다.
 
+```js
+prompt = function() {
+    if (typeof db == 'undefined') {
+        return '(nodb)> '
+    }
+    // 마지막 db 연산 확인
+    try {
+        db.runCommand({getLastError:1});
+    }
+    catch (e) {
+        print(e);
+    }
+    return db + "> "
+}；
+```
 
-
-
-
-
+이 때 연결이 끊어진 경우에 대한 처리를 위해 getLastError를 호출할 수 있다.  
+이를 통해 직전에 에러가 발생한 경우 출력하여 사용자에게 보여주고, 셸을 다시 연결하게 할 수 있다.
 
 
 
