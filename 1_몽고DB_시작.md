@@ -308,16 +308,20 @@ prompt = function() {
 에디터에서 원하는 구문을 입력한 후 저장하면, 셸에 변수가 로드되어 사용할 수 있다.  
 셸에서 기본으로 사용할 에디터를 지정하고 싶다면 .mongorc.js에서 EDITOR 변수에 원하는 에디터의 bin 위치를 저장하면 된다.
 
+### 2.7.6 불편한 컬렉션명
 
-2.7.6 불편한 컬렉션명
+몽고DB에서는 `db.[컬렉션 이름]`으로 컬렉션에 접근하는 것이 가능하다.  
+다만 컬렉션 이름이 예약어이거나 유효하지 않은 속성명이라면 위와 같이 접근하는 것이 불가능하다.  
+예를 들어 db.version은 사전에 정의된 db의 메서드이기 때문에, db.version으로는 version 컬렉션에 접근하는 것이 불가능하다.  
+foo-bar-baz, abcl23 등과 같이 유효하지 않은 자바스크립트 속성명인 경우에도 db.xxx로 접근이 불가능하다.
 
+이런 경우에는 getCollection 메서드를 사용해서 접근해야 한다. - `db.getCollection("version")`  
+유효하지 않은 속성명인 경우에는 배열 접근 구문을 사용해서 접근할 수도 있다. - `db['foo-bar-baz']`  
+이 점을 이용하면 컬렉션 명을 변수로 두고 접근하는 것도 가능하다.
 
-
-
-
-
-
-
-
-
-
+```js
+var collections = ["posts", "comments", "authors"];
+for (var i in collections) {
+    print (db.blog[coUections[i]]);
+}
+```
