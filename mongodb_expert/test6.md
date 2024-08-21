@@ -102,7 +102,7 @@ db.places.find({
 
 이 데이터를 flat collection에 저장하면 다음과 같이 각 카테고리와 하위 카테고리를 별도로 저장하게 됩니다.
 
-```json
+```js
 // 카테고리 문서
 {
     "_id": "category1",
@@ -158,7 +158,7 @@ MongoDB의 Subset 패턴은 특정 엔티티와 관련된 데이터의 일부분
 
 예를 들어, 하나의 코스에 수백 개의 리뷰가 있을 때 모든 리뷰를 저장하는 대신, 코스 문서 안에 최근 10개의 리뷰만을 하위 문서로 저장할 수 있습니다. 이렇게 하면 코스를 조회할 때 전체 리뷰를 가져올 필요 없이 자주 접근하는 최근 리뷰만을 빠르게 조회할 수 있습니다.
 
-```json
+```js
 {
     "_id": "course123",
     "title": "MongoDB Basics",
@@ -166,7 +166,7 @@ MongoDB의 Subset 패턴은 특정 엔티티와 관련된 데이터의 일부분
     "recent_reviews": [
         { "user": "user1", "rating": 5, "comment": "Great course!" },
         { "user": "user2", "rating": 4, "comment": "Very informative." },
-        ...
+        // ...
     ]
 }
 
