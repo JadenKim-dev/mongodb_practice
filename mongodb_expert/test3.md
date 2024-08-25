@@ -194,6 +194,7 @@ db.collection('customers').insertOne()
     "_id": ObjectId("userId1"),
     "name": "John Doe",
     "email": "john.doe@example.com"
+    "is_abnormal": true, // 이상치 데이터임을 명시
   }
   // 이상치 컬렉션
   {
@@ -207,11 +208,10 @@ db.collection('customers').insertOne()
   }
   ```
 
-- `Schema Versioning Pattern`: 기존 데이터와의 호환성을 유지하면서 데이터 모델 구조를 변경할 때, 각 스키마에 버전을 붙이는 식으로 사용됨
+- `Schema Versioning Pattern`: 기존 데이터와의 호환성을 유지하면서 데이터 모델 구조를 변경할 때, 각 스키마에 버전을 붙이는 식으로 사용
 
 - `Subset Pattern`: 특정 기준에 따라 더 큰 데이터 세트를 더 작은 부분 집합으로 분할
-
-  - 자주 사용되거나 액세스되는 일부 데이터를 별도의 필드나 컬렉션으로 분리하여 저장한다.
+  - 자주 사용되거나 액세스되는 일부 데이터는 도큐먼트에 포함하고, 나머지 데이터는 별도의 컬렉션으로 분리하여 저장한다.
 
   ```js
   // 자주 액세스되는 데이터만을 포함하는 사용자 문서
